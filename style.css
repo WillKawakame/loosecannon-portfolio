@@ -1,0 +1,752 @@
+/* ============================================================
+   ESTILOS GLOBAIS
+   Configurações base aplicadas a toda a página
+   ============================================================ */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #eeeeee;
+  color: #181818;
+  font-family: 'Syne', sans-serif;
+  line-height: 1.7;
+
+  /* Grade decorativa de fundo usando dois gradientes sobrepostos */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 2px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 2px);
+  background-size: 48px 48px;
+  background-attachment: fixed;
+}
+
+/* ============================================================
+   NAVBAR — ISLAND
+   Barra de navegação flutuante com efeito glassmorphism
+   ao rolar a página
+   ============================================================ */
+
+.navbar-island {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+
+  /* Posicionamento fixo no topo com margem */
+  position: sticky;
+  top: 20px;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  z-index: 1000;
+  border-radius: 50px;
+
+  /* Animação controlada pela posição do scroll */
+  animation: adjust-navbar linear both;
+  animation-timeline: scroll();
+  animation-range: 0 100px;
+}
+
+/* Transição de sólido → glassmorphism conforme o usuário rola */
+@keyframes adjust-navbar {
+  from {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+  }
+
+  to {
+    background-color: rgba(255, 255, 255, 0.425);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Classe adicionada via JS quando a página já foi rolada */
+.navbar-island.scrolled {
+  background: rgba(255, 255, 255, 0.349);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 30px;
+}
+
+/* Grupo de botões com borda interna sutil */
+.navbar-island .buttons {
+  display: flex;
+  border: 1px solid rgba(39, 39, 39, 0.075);
+  border-radius: 50px;
+}
+
+.logo-img {
+  height: 40px;
+  display: block;
+}
+
+/* Links da navbar */
+.navbar-island nav a {
+  color: #aaa;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.navbar-island nav a:hover,
+.navbar-island nav a.active {
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   HERO SECTION
+   Seção principal com texto à esquerda e imagem à direita
+   ============================================================ */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  min-height: 80vh;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.hero-image {
+  flex: 2;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Link dentro do subtítulo */
+.subtitle a {
+  color: #605B51;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.subtitle a:hover {
+  color: #8d877c5b;
+}
+
+/* Título principal com tamanho responsivo via clamp */
+.hero-text h1 {
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 1;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.description {
+  margin: 20px 0;
+  color: #605B51;
+  font-size: 1.1rem;
+}
+
+/* Botão com estilo outline */
+.btn-outline {
+  border: 1px solid #605B51;
+  background: transparent;
+  color: #605B51;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-outline:hover {
+  background: #8d877c5b;
+  color: #8d877c5b;
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE
+   Ajustes para telas menores que 768px
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  /* Menu oculto no mobile para simplificar a navegação */
+  .navbar-island nav {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   HEADER LEGADO
+   Cabeçalho de página anterior (não utiliza a island navbar)
+   ============================================================ */
+
+header {
+  background-color: #605B51;
+  text-align: center;
+  padding: 60px 20px 40px;
+  border-bottom: 2px solid #333;
+}
+
+header img {
+  max-width: 200px;
+  width: 100%;
+}
+
+header h1 {
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+  margin-top: 16px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+header p {
+  color: #c4c4c4;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   NAV LEGADO
+   Navegação simples usada junto ao header legado
+   ============================================================ */
+
+nav {
+  background-color: #605B51;
+  border-bottom: 1px solid #333;
+  text-align: center;
+  padding: 4px 0;
+}
+
+nav a {
+  color: #aaa;
+  text-decoration: none;
+  padding: 10px 18px;
+  display: inline-block;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   SEÇÕES GENÉRICAS
+   Estilos base compartilhados entre todas as <section>
+   ============================================================ */
+
+section {
+  padding: 60px 0;
+}
+
+section h2 {
+  font-size: 1.4rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid #444;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+
+/* ============================================================
+   GAME SECTION
+   Seção de destaque de jogo com vídeo/imagem de fundo
+   e card sobreposto
+   ============================================================ */
+
+.game-section {
+  height: 75vh;
+  background-color: black;
+  position: relative;
+}
+
+/* Banner que ocupa toda a área da seção */
+.game-section .game-banner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  clip-path: inset(0px 0px 0px 0px);
+}
+
+/* Vídeo de fundo levemente borrado */
+.game-section .game-banner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: blur(4px);
+}
+
+/* Imagem de fundo sem filtro (alternativa ao vídeo) */
+.game-banner > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: none;
+}
+
+.game-section .container {
+  display: grid;
+}
+
+/* Card branco flutuante sobre o banner */
+.game-card {
+  position: absolute;
+  background-color: #eeeeee;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  height: 85%;
+  width: 75%;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.705);
+  display: flex;
+  align-items: stretch;
+}
+
+.game-card h3 {
+  font-family: "Filson Pro", sans-serif;
+  font-style: bold;
+  font-size: larger;
+  margin-top: 1px;
+  margin-bottom: 8px;
+}
+
+.game-card p {
+  font-family: "Filson Pro", sans-serif;
+  font-size: large;
+}
+
+
+/* ---- Game Card: Logo ---- */
+
+.game-card .card-logo {
+  position: relative;
+  top: 0;
+  z-index: 10;
+  background: transparent !important;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.game-card .card-logo img {
+  display: block;
+  background: transparent !important;
+  max-width: 220px;
+  width: auto;
+}
+
+
+/* ---- Game Card: Conteúdo principal (esquerda) ---- */
+
+.card-hero {
+  flex: 1;
+  width: 50%;
+  padding: 60px 50px 30px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+/* ---- Game Card: Screenshots (direita) ---- */
+
+.game-card .screenshots {
+  flex: 1;
+  width: 50%;
+  padding: 30px 0 30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Screenshot principal em destaque */
+.screenshots .top {
+  height: 400px;
+  border-radius: 30px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+/* Grade de miniaturas abaixo do screenshot principal */
+.screenshots .bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.screenshots .box {
+  height: 140px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.screenshots img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+
+/* ============================================================
+   DIVISOR
+   Faixa horizontal com logo centralizado entre seções
+   ============================================================ */
+
+.diviser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.473);
+}
+
+.diviser img {
+  height: 75%;
+  max-height: 75px;
+  width: auto;
+}
+
+
+/* ============================================================
+   CONTAINER — USO GERAL
+   Centralizador de conteúdo reutilizável
+   ============================================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+/* ============================================================
+   SEÇÃO SOBRE - INTERATIVIDADE
+   ============================================================ */
+
+#sobre {
+  background-color: #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+#sobre:hover {
+  background-color: #222;
+}
+
+#sobre p {
+  color: #bbb;
+  max-width: 700px;
+  transition: all 0.3s ease;
+}
+
+#sobre p:hover {
+  color: #ddd;
+}
+
+
+/* ============================================================
+   SEÇÃO CONTATO - INTERATIVIDADE
+   ============================================================ */
+
+#contato {
+  background-color: #1a1a1a;
+  transition: all 0.3s ease;
+}
+
+#contato:hover {
+  background-color: #222;
+}
+
+#contato ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+#contato li {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#contato li:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateX(10px);
+}
+
+#contato a {
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+#contato a:hover {
+  color: #fff !important;
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+
+/* ============================================================
+   INTERATIVIDADE - TRANSIÇÕES E HOVER EFFECTS
+   Melhoram a experiência do usuário com feedback visual
+   ============================================================ */
+
+/* Transições em imagens */
+img {
+  transition: all 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+/* Links com efeito hover */
+a {
+  transition: all 0.3s ease;
+}
+
+#contato a:hover {
+  transform: translateX(5px);
+}
+
+/* Botões com interatividade */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Cards com efeito de elevação */
+.game-card {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* Screenshots com zoom no hover */
+.screenshots img {
+  transition: all 0.3s ease;
+}
+
+.screenshots .top img:hover {
+  transform: scale(1.05);
+}
+
+.screenshots .box img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.15);
+}
+
+/* Navbar com suavidade */
+.navbar-island {
+  transition: all 0.3s ease;
+}
+
+.navbar-island nav a {
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.navbar-island nav a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.navbar-island nav a:hover::before {
+  width: 100%;
+}
+
+/* Logo com interatividade */
+.logo-img {
+  transition: all 0.3s ease;
+}
+
+.logo-img:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  transform: scale(1.05);
+}
+
+/* Seções com transição suave */
+section {
+  transition: all 0.5s ease;
+}
+
+/* Container com efeito */
+.container {
+  transition: all 0.3s ease;
+}
+
+/* Divisor com hover */
+.diviser {
+  transition: all 0.3s ease;
+}
+
+.diviser:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================================
+   FOOTER - INTERATIVIDADE
+   ============================================================ */
+
+footer {
+  transition: all 0.3s ease;
+}
+
+footer span {
+  transition: all 0.3s ease;
+}
+
+footer:hover {
+  background-color: #3a3a3a;
+}
+
+
+/* ============================================================
+   GAME BANNER OVERLAY
+   Grade de imagens sobreposta ao banner do jogo
+   (layout: 1 imagem grande à esquerda + 2 menores à direita)
+   ============================================================ */
+
+.game-banner-overlay {
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  height: 85%;
+  width: 80%;
+
+  transform: translateY(-50%);
+
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  padding: 20px;
+
+  z-index: 5;
+}
+
+.game-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: none;
+}
+
+/* Imagem grande — ocupa as duas linhas da coluna esquerda */
+.left {
+  grid-row: 1 / 3;
+  grid-column: 1;
+  background: black;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+/* Imagem pequena superior — coluna direita, linha 1 */
+.right-top {
+  grid-row: 1;
+  grid-column: 2;
+  background: lightblue;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+/* Imagem pequena inferior — coluna direita, linha 2 */
+.right-bottom {
+  grid-row: 2;
+  grid-column: 2;
+  background: lightcoral;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   HERO SECTION — INTERATIVIDADE ADICIONAL
+   ============================================================ */
+
+.hero-image {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-image:hover img {
+  transform: scale(1.05) rotate(-2deg);
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+.hero-text {
+  transition: all 0.3s ease;
+}
+
+.hero-text h1 {
+  transition: all 0.3s ease;
+}
+
+.hero-text h1:hover {
+  color: #8d877c;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   RESPONSIVIDADE - INTERATIVIDADE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .game-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .screenshots .box img:hover {
+    transform: scale(1.05);
+  }
+
+  #contato li:hover {
+    transform: translateX(5px);
+  }
+}
+
